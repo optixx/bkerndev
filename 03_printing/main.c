@@ -52,9 +52,7 @@ void outportb (unsigned short _port, unsigned char _data)
 *  infinite loop. This will be like our 'idle' loop */
 int main()
 {
-    /* You would add commands after here */
-
-    /* ...and leave this loop in. There is an endless loop in
-    *  'start.asm' also, if you accidentally delete this next line */
+    init_video();
+    puts("Hello World!");
     for (;;);
 }
