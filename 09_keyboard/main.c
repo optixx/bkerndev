@@ -29,9 +29,6 @@ size_t strlen(const char *str)
     return retval;
 }
 
-/* We will use this later on for reading from the I/O ports to get data
-*  from devices such as the keyboard. We are using what is called
-*  'inline assembly' in these routines to actually do the work */
 unsigned char inportb (unsigned short _port)
 {
     unsigned char rv;
@@ -39,23 +36,29 @@ unsigned char inportb (unsigned short _port)
     return rv;
 }
 
-/* We will use this to write to I/O ports to send bytes to devices. This
-*  will be used in the next tutorial for changing the textmode cursor
-*  position. Again, we use some inline assembly for the stuff that simply
-*  cannot be done in C */
 void outportb (unsigned short _port, unsigned char _data)
 {
     __asm__ __volatile__ ("outb %1, %0" : : "dN" (_port), "a" (_data));
 }
 
-int main()
+void main()
 {
+    int i;
+
     gdt_install();
     idt_install();
     isrs_install();
     irq_install();
     init_video();
     timer_install();
-    puts("Hello World!");
+    keyboard_install();
+
+    __asm__ __volatile__ ("sti");
+
+    puts("Hello World!\n");
+
+//    i = 10 / 0;
+//    putch(i);
+
     for (;;);
 }

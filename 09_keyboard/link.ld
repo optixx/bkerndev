@@ -1,4 +1,5 @@
 OUTPUT_FORMAT("binary")
+OUTPUT_ARCH(i386)
 ENTRY(start)
 phys = 0x00100000;
 SECTIONS
