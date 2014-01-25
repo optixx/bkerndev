@@ -37,17 +37,9 @@ mboot:
 ; will insert an 'extern _main', followed by 'call _main', right
 ; before the 'jmp $'.
 stublet:
-    extern _main
-    call _main
+    extern main
+    call main
     jmp $
-
-
-; Shortly we will add code for loading the GDT right here!
-
-
-; In just a few pages in this tutorial, we will add our Interrupt
-; Service Routines (ISRs) right here!
-
 
 
 ; Here is the definition of our BSS section. Right now, we'll use

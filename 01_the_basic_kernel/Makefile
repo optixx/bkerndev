@@ -1,10 +1,18 @@
+OBJECTS = start.o
+
 all: kernel.bin
 
-start.o: start.s
-	nasm -f aout -o start.o start.s
+.c.o:
+	gcc -Wall -O -m32  -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdlib -nostdinc -fno-builtin -c $< -o $@
 
-kernel.bin: start.o
-	ld -T link.ld -o kernel.bin start.o
+.s.o:
+	nasm -f elf  -o $@ $<
+
+kernel.bin: $(OBJECTS)
+	ld -m elf_i386  -T link.ld -o kernel.bin $(OBJECTS)
+
+run: kernel.bin
+	qemu-system-i386 -kernel kernel.bin -net none -m 8 -monitor stdio
 
 clean:
 	rm -f *.o kernel.bin
