@@ -1,9 +1,4 @@
-/* bkerndev - Bran's Kernel Development Tutorial
-*  By:   Brandon F. (friesenb@gmail.com)
-*  Desc: Screen output functions for Console I/O
-*
-*  Notes: No warranty expressed or implied. Use at own risk. */
-#include <system.h>
+#include "system.h"
 
 /* These define our textpointer, our background and foreground
 *  colors (attributes), and x and y cursor coordinates */
